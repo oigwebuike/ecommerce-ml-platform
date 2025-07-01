@@ -1,0 +1,49 @@
+# MODIFY the docker-compose.yml:
+
+version: '3.8'
+
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  # Redis - now optional for enhanced performance
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    # ADD these for graceful failure:
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  ml-api:
+    build:
+      context: .
+      dockerfile: infrastructure/Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      - kafka
+      # Redis is optional - removed from depends_on
+    environment:
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      # Redis will be auto-detected
+    volumes:
+      - ./models:/app/models

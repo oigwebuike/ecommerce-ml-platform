@@ -1,0 +1,122 @@
+[
+  {
+    "event_id": "evt_001",
+    "user_id": "user_0001",
+    "event_type": "view",
+    "product_id": "prod_001",
+    "category": "electronics",
+    "price": 299.99,
+    "timestamp": "2024-01-15T10:30:00Z",
+    "session_id": "sess_001",
+    "user_agent": "desktop",
+    "location": "US"
+  },
+  {
+    "event_id": "evt_002", 
+    "user_id": "user_0001",
+    "event_type": "cart_add",
+    "product_id": "prod_001",
+    "category": "electronics",
+    "price": 299.99,
+    "timestamp": "2024-01-15T10:32:00Z",
+    "session_id": "sess_001",
+    "user_agent": "desktop",
+    "location": "US"
+  },
+  {
+    "event_id": "evt_003",
+    "user_id": "user_0001", 
+    "event_type": "purchase",
+    "product_id": "prod_001",
+    "category": "electronics",
+    "price": 299.99,
+    "timestamp": "2024-01-15T10:35:00Z",
+    "session_id": "sess_001",
+    "user_agent": "desktop",
+    "location": "US"
+  },
+  {
+    "event_id": "evt_004",
+    "user_id": "user_0002",
+    "event_type": "search",
+    "product_id": "prod_025",
+    "category": "clothing", 
+    "price": 49.99,
+    "timestamp": "2024-01-15T10:40:00Z",
+    "session_id": "sess_002",
+    "user_agent": "mobile",
+    "location": "EU"
+  },
+  {
+    "event_id": "evt_005",
+    "user_id": "user_0002",
+    "event_type": "view",
+    "product_id": "prod_025",
+    "category": "clothing",
+    "price": 49.99, 
+    "timestamp": "2024-01-15T10:41:00Z",
+    "session_id": "sess_002",
+    "user_agent": "mobile",
+    "location": "EU"
+  },
+  {
+    "event_id": "evt_006",
+    "user_id": "user_0003",
+    "event_type": "view",
+    "product_id": "prod_050",
+    "category": "books",
+    "price": 24.95,
+    "timestamp": "2024-01-15T11:00:00Z",
+    "session_id": "sess_003", 
+    "user_agent": "tablet",
+    "location": "ASIA"
+  },
+  {
+    "event_id": "evt_007",
+    "user_id": "user_0003",
+    "event_type": "cart_add",
+    "product_id": "prod_050", 
+    "category": "books",
+    "price": 24.95,
+    "timestamp": "2024-01-15T11:02:00Z",
+    "session_id": "sess_003",
+    "user_agent": "tablet",
+    "location": "ASIA"
+  },
+  {
+    "event_id": "evt_008",
+    "user_id": "user_0004",
+    "event_type": "view",
+    "product_id": "prod_075",
+    "category": "home",
+    "price": 89.99,
+    "timestamp": "2024-01-15T11:15:00Z",
+    "session_id": "sess_004",
+    "user_agent": "desktop", 
+    "location": "US"
+  },
+  {
+    "event_id": "evt_009",
+    "user_id": "user_0005",
+    "event_type": "view",
+    "product_id": "prod_100",
+    "category": "sports",
+    "price": 149.99,
+    "timestamp": "2024-01-15T11:30:00Z",
+    "session_id": "sess_005",
+    "user_agent": "mobile",
+    "location": "US"
+  },
+  {
+    "event_id": "evt_010",
+    "user_id": "user_0005",
+    "event_type": "purchase",
+    "product_id": "prod_100",
+    "category": "sports", 
+    "price": 149.99,
+    "timestamp": "2024-01-15T11:35:00Z",
+    "session_id": "sess_005",
+    "user_agent": "mobile",
+    "location": "US"
+  }
+]

@@ -1,0 +1,143 @@
+# Configuration for the E-commerce ML Platform
+
+# Kafka Configuration
+kafka:
+  bootstrap_servers: "localhost:9092"
+  topics:
+    user_events: "user_events"
+    transactions: "transactions"
+    enriched_events: "enriched_events"
+    fraud_detection: "fraud_detection"
+  
+  producer:
+    acks: 1
+    retries: 3
+    batch_size: 16384
+    linger_ms: 5
+    compression_type: "snappy"
+  
+  consumer:
+    group_id: "ml_platform"
+    auto_offset_reset: "latest"
+    enable_auto_commit: true
+    session_timeout_ms: 30000
+
+# Redis Configuration  
+redis:
+  host: "localhost"
+  port: 6379
+  db: 0
+  password: null
+  socket_timeout: 5
+  socket_connect_timeout: 5
+  
+  # Feature caching
+  feature_cache:
+    ttl_seconds: 60
+    max_keys: 100000
+  
+  # Model caching
+  model_cache:
+    ttl_seconds: 3600
+    max_models: 10
+
+# ML Configuration
+ml_models:
+  fraud_detection:
+    model_name: "fraud_rf_v1"
+    version: "1.0.0"
+    features:
+      - "events_last_hour"
+      - "purchases_last_24h"
+      - "session_length"
+      - "transaction_amount"
+      - "avg_transaction"
+      - "rapid_activity"
+      - "burst_purchases"
+      - "hour_of_day"
+      - "is_weekend"
+      - "risk_score"
+    threshold: 0.5
+    
+  recommendation:
+    model_name: "collaborative_filtering_v1"
+    version: "1.0.0"
+    embedding_dim: 50
+    top_k: 10
+
+# Performance Configuration
+performance:
+  ml_inference:
+    target_latency_ms: 30
+    max_latency_ms: 100
+    
+  stream_processing:
+    window_size_minutes: 60
+    batch_size: 1000
+    
+  batch_processing:
+    partition_size: "128MB"
+    max_memory: "4GB"
+
+# Data Storage
+storage:
+  data_lake:
+    bucket: "ecommerce-ml-data-lake"
+    prefix: "data"
+    format: "parquet"
+    
+  feature_store:
+    path: "features"
+    partitioning:
+      - "date"
+      - "category"
+      
+  model_registry:
+    path: "models"
+    versioning: true
+
+# Monitoring and Logging
+monitoring:
+  metrics:
+    enabled: true
+    port: 9090
+    
+  logging:
+    level: "INFO"
+    format: "json"
+    
+  alerts:
+    latency_threshold_ms: 50
+    error_rate_threshold: 0.01
+    
+# Development Settings
+development:
+  debug: true
+  sample_data: true
+  mock_external_services: true
+  
+# Production Settings  
+production:
+  debug: false
+  sample_data: false
+  mock_external_services: false
+  replicas: 3
+  resources:
+    cpu: "1000m"
+    memory: "2Gi"
+
+# Caching Configuration
+caching:
+  # Strategy: "auto", "redis", "memory", "none"
+  strategy: "auto"  # Auto-detect Redis availability
+  
+  redis:
+    host: "localhost"
+    port: 6379
+    password: null
+    db: 0
+    
+  memory:
+    max_size: 10000      # Maximum cached items
+    ttl_seconds: 60      # Time to live
+    cleanup_interval: 300 # Cleanup every 5 minutes
